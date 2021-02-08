@@ -17,7 +17,7 @@ class CreateDishesTable extends Migration
             $table->id();
             $table->string('dish');
             $table->text('description');
-            $table->integer('price');
+            $table->tinyInteger('price')->unsigned();
             $table->timestamps();
         });
     }

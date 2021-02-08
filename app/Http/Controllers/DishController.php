@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dish;
 use Illuminate\Http\Request;
+use PHPUnit\Util\Json;
 
 class DishController extends Controller
 {
@@ -14,7 +15,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        //
+        return Dish::all();
     }
 
     /**
@@ -24,7 +25,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view ('form');
     }
 
     /**
@@ -35,7 +36,16 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'dish'=>'required',
+            'description'=>'required',
+            'price'=>'required'
+        ]);
+
+        $dish = Dish::create($request->all());
+        $dish->save();
+        
+        return response()->json($dish, 201);
     }
 
     /**
@@ -46,7 +56,7 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        //
+        return $dish;
     }
 
     /**
@@ -55,9 +65,11 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dish $dish)
+    public function edit(Dish $dish, $id)
     {
-        //
+        $dish = Dish::find($id);
+        return redirect(route('editDish'));
+
     }
 
     /**
@@ -67,9 +79,19 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, Dish $dish, $id)
     {
-        //
+        
+        $request->validate([
+            'dish'=>'required',
+            'description'=>'required',
+            'price'=>'required'
+        ]);
+
+        $dish = Dish::find($id)
+            ->update($request->all());
+
+        return response()->json($dish);
     }
 
     /**
@@ -82,5 +104,6 @@ class DishController extends Controller
     {
         $dish = Dish::find($id);
         $dish->delete();
+        return response()->json(null, 204);
     }
 }

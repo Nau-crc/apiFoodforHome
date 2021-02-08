@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Dish;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DishFactory extends Factory
 {
@@ -22,9 +23,9 @@ class DishFactory extends Factory
     public function definition()
     {
         return [
-            'dish' => $this->faker->dish,
-            'description' => $this->faker->description,
-            'price' => $this->faker->price
+            'dish' => $this->faker->text(20),
+            'description' => $this->faker->text(50),
+            'price' => $this->faker->randomNumber(2),
         ];
     }
 }
