@@ -13,12 +13,7 @@ class DatabaseTest extends TestCase
      *
      * @return void
      */
-    protected $seed = true;
-
-    public function test_database_recieves_info()
-    {
-        $this->seed();
-    }
+   
 
 
     

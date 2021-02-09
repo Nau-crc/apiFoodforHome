@@ -16,11 +16,11 @@ class UpdateDishTest extends TestCase
      */
     public function test_can_update_dish()
     {
-        $dish = Dish::factory()->make();
+        $dish = Dish::factory(1)->make();
 
         $data= [
-            'dish' => $this->faker->sentence,
-            'description' => $this->faker->paragraph
+            'dish' => 'cacahuete',
+            'description' => 'sabroso'
         ];
 
         $this->put(route('dishes.update', $dish->id), $data)

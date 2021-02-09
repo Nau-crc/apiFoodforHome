@@ -15,7 +15,8 @@ class DishController extends Controller
      */
     public function index()
     {
-        return Dish::all();
+        $dish = Dish::all();
+        return response()->json($dish);
     }
 
     /**
@@ -25,7 +26,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view ('form');
+        return response()->json('dishes.create', 201);
     }
 
     /**
@@ -56,7 +57,7 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return $dish;
+        return response()->json($dish->all());
     }
 
     /**
