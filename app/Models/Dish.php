@@ -10,9 +10,5 @@ class Dish extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'dish'=>'required',
-        'description'=>'required',
-        'price'=>'required'
-    ];
+    protected $guarded =[];
 }

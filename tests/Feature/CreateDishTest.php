@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Dish;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class CreateDishTest extends TestCase
 {
 
-   
+   use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -30,9 +30,8 @@ class CreateDishTest extends TestCase
             'description' => 'es muy rica',
             'price' => 12,
         ];
-        dd();
 
-        $this->post(route('dishes.store'), $dish)
+        $this->postJson(route('dishes.store'), $dish)
             ->assertStatus(201)
             ->assertJson($dish);
     }

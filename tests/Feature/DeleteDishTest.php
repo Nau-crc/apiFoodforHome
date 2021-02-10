@@ -5,23 +5,23 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Dish;
 
 class DeleteDishTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_dish_can_be_deleted($dish)
+    public function test_dish_can_be_deleted()
     {
-        $dish = [
-            'dish' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
-        ];
+        $this->withoutExceptionHandling();
+        $dish = Dish::factory()->create();
 
-        $this->delete(route('dishes.delete'), $dish)
-            ->assertStatus(204)
-            ->assertJson($dish);
+        $response = $this->delete('/api/dishes/1');
+           $response->assertStatus(204);
+          
     }
 }

@@ -42,9 +42,12 @@ class DishController extends Controller
             'description'=>'required',
             'price'=>'required'
         ]);
-
-        $dish = Dish::create($request->all());
-        $dish->save();
+        $dish = Dish::create([
+            'dish'=> $request->dish,
+            'description'=>$request->description,
+            'price'=>$request->price
+        ]);
+    
         
         return response()->json($dish, 201);
     }
@@ -80,7 +83,7 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish, $id)
+    public function update(Request $request, $id)
     {
         
         $request->validate([
@@ -89,10 +92,11 @@ class DishController extends Controller
             'price'=>'required'
         ]);
 
-        $dish = Dish::find($id)
-            ->update($request->all());
+        $dish = Dish::find($id);
 
-        return response()->json($dish);
+        $dish->update($request->all());
+
+        return response()->json($dish, 200);
     }
 
     /**
@@ -101,10 +105,10 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dish $dish, $id)
+    public function destroy($id)
     {
         $dish = Dish::find($id);
         $dish->delete();
-        return response()->json(null, 204);
+        return response()->json([], 204);
     }
 }

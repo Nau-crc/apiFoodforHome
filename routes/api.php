@@ -19,5 +19,5 @@ use App\Http\Controllers\DishController;
 
 Route::get('/dishes',[DishController::class, 'index'])->name('dishes.index');
 Route::post('/dishes',[DishController::class, 'store'])->name('dishes.store');
-Route::put('/dishes',[DishController::class, 'update'])->name('dishes.update');
-Route::delete('/dishes/{$id}',[DishController::class, 'delete'])->name('dishes.delete');
+Route::put('/dishes/{id}',[DishController::class, 'update'])->name('dishes.update');
+Route::delete('/dishes/{id}',[DishController::class, 'destroy'])->name('dishes.delete');

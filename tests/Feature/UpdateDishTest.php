@@ -9,6 +9,7 @@ use Tests\TestCase;
 
 class UpdateDishTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -16,11 +17,12 @@ class UpdateDishTest extends TestCase
      */
     public function test_can_update_dish()
     {
-        $dish = Dish::factory(1)->make();
-
-        $data= [
+        $this->withoutExceptionHandling();
+        $dish = Dish::factory()->create();
+        $data = [
             'dish' => 'cacahuete',
-            'description' => 'sabroso'
+            'description' => 'sabroso',
+            'price' => 4
         ];
 
         $this->put(route('dishes.update', $dish->id), $data)
